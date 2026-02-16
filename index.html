@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vivie | Premium Report Generator</title>
-    
+    <title>Premium Body Balance | Report Generator</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -33,16 +33,16 @@
                     },
                     colors: {
                         brand: {
-                            50: '#fbf6f6',
-                            100: '#f5e8e8',
-                            200: '#edd5d4',
-                            300: '#e2bcbb',
-                            400: '#dba9a8',  // Base: Dusty Rose
-                            500: '#c58a89',
-                            600: '#a86b6a',
-                            700: '#8a5251',
-                            800: '#6e403f',  // Text Main
-                            900: '#553231',
+                            50: '#faf8f1',
+                            100: '#f2ece0',
+                            200: '#e0d4be',
+                            300: '#d0c09a',
+                            400: '#c4a96c',
+                            500: '#a68d52',
+                            600: '#8a7340',
+                            700: '#6e5b32',
+                            800: '#4a3d22',
+                            900: '#2e2615',
                         }
                     }
                 }
@@ -52,8 +52,8 @@
 
     <style>
         body {
-            background-color: #fbf6f6;
-            color: #6e403f;
+            background-color: #faf8f1;
+            color: #4a3d22;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -61,14 +61,13 @@
         }
         /* Custom scrollbar */
         .custom-scroll::-webkit-scrollbar { width: 6px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #fbf6f6; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #dba9a8; border-radius: 3px; }
-        
+        .custom-scroll::-webkit-scrollbar-track { background: #faf8f1; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #c4a96c; border-radius: 3px; }
+
         /* Chart Wrapper */
         .chart-wrapper {
             position: relative;
             width: 100%;
-            height: 220px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -85,11 +84,11 @@
         .decoration-line::before, .decoration-line::after {
             content: '';
             flex: 1;
-            border-bottom: 1px solid #edd5d4;
+            border-bottom: 1px solid #e0d4be;
         }
         .decoration-line span {
             padding: 0 10px;
-            color: #dba9a8;
+            color: #c4a96c;
             font-family: "Shippori Mincho", serif;
             font-size: 0.75rem;
             letter-spacing: 0.1em;
@@ -97,7 +96,7 @@
         }
 
         /* Logo */
-        .vivie-logo {
+        .salon-logo {
             font-family: "Shippori Mincho", serif;
             letter-spacing: 0.15em;
         }
@@ -108,20 +107,46 @@
         }
         .tab-button.active {
             background-color: #fff;
-            border-color: #dba9a8;
-            color: #8a5251;
+            border-color: #c4a96c;
+            color: #6e5b32;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
-        
+
+        /* Category Tab Styles */
+        .cat-tab {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .cat-tab.active {
+            background: linear-gradient(135deg, #c4a96c 0%, #d4be8a 100%);
+            color: #fff;
+            box-shadow: 0 2px 6px rgba(196, 169, 108, 0.3);
+        }
+
+        /* Menu Radio Styles */
+        .menu-radio-label {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .menu-radio-label:has(input:checked) {
+            background-color: #faf8f1;
+            border-color: #c4a96c;
+            box-shadow: inset 0 0 0 1px #c4a96c;
+        }
+        .menu-radio-label:has(input:checked) .menu-radio-text {
+            color: #6e5b32;
+            font-weight: 700;
+        }
+
         /* Range Slider */
         input[type=range] {
-            accent-color: #dba9a8;
+            accent-color: #c4a96c;
         }
 
         /* Coupon Design */
         .coupon-premium {
-            background: linear-gradient(135deg, #fff 0%, #fff 100%);
-            border: 1px solid #e2bcbb;
+            background: linear-gradient(135deg, #fff 0%, #faf8f1 100%);
+            border: 1px solid #d0c09a;
             position: relative;
         }
         .coupon-premium::before {
@@ -131,7 +156,7 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: #dba9a8;
+            background: linear-gradient(180deg, #c4a96c 0%, #a68d52 100%);
         }
 
         /* Prevent Dragging */
@@ -159,20 +184,20 @@
 
         <!-- LEFT PANEL: CONTROLS -->
         <aside id="panel-edit" class="w-full md:w-1/2 lg:w-5/12 bg-white border-r border-brand-200 h-full flex flex-col shadow-lg z-10 absolute md:relative inset-0 md:inset-auto overflow-hidden">
-            
+
             <!-- Header -->
-            <div class="p-4 bg-brand-400 text-white shadow-md shrink-0">
+            <div class="p-4 shadow-md shrink-0" style="background: linear-gradient(135deg, #c4a96c 0%, #a68d52 100%);">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="vivie-logo font-medium text-xl">vivie</h1>
-                        <p class="text-[10px] text-white/90 tracking-wider">Report Generator</p>
+                        <h1 class="salon-logo font-medium text-lg text-white leading-tight">Premium Body Balance</h1>
+                        <p class="text-[10px] text-white/80 tracking-wider">Report Generator</p>
                     </div>
                     <button onclick="resetForm()" class="text-xs bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded transition border border-white/40">リセット</button>
                 </div>
             </div>
 
             <div class="flex-1 overflow-y-auto p-6 custom-scroll space-y-8 pb-20 md:pb-6">
-                
+
                 <!-- 1. Basic Info -->
                 <section>
                     <h3 class="text-sm font-serif font-bold text-brand-600 border-l-4 border-brand-400 pl-2 mb-4 flex items-center gap-2">
@@ -190,53 +215,27 @@
                     </div>
                 </section>
 
-                <!-- 2. Today's Menu -->
+                <!-- 2. Category & Menu Selection -->
                 <section>
                     <h3 class="text-sm font-serif font-bold text-brand-600 border-l-4 border-brand-400 pl-2 mb-4 flex items-center gap-2">
-                        <i class="ph ph-list-checks"></i> 本日行ったメニュー
+                        <i class="ph ph-list-checks"></i> カテゴリ・メニュー選択
                     </h3>
-                    
-                    <div class="bg-white p-4 border border-brand-200 rounded-lg shadow-sm mb-4">
-                        <p class="text-xs font-bold text-brand-500 border-b border-brand-100 pb-2 mb-3">メインメニュー (複数選択可)</p>
-                        <div class="space-y-2">
-                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-brand-50 p-1 rounded transition">
-                                <input type="checkbox" class="menu-checkbox form-checkbox text-brand-400 rounded focus:ring-brand-400" value="小顔矯正＋ドライヘッドスパ" onchange="updateUI()">
-                                <span class="text-sm text-brand-800">小顔矯正＋ドライヘッドスパ</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-brand-50 p-1 rounded transition">
-                                <input type="checkbox" class="menu-checkbox form-checkbox text-brand-400 rounded focus:ring-brand-400" value="ハーブピーリング" onchange="updateUI()">
-                                <span class="text-sm text-brand-800">ハーブピーリング</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-brand-50 p-1 rounded transition">
-                                <input type="checkbox" class="menu-checkbox form-checkbox text-brand-400 rounded focus:ring-brand-400" value="よもぎ蒸し" onchange="updateUI()">
-                                <span class="text-sm text-brand-800">よもぎ蒸し</span>
-                            </label>
-                        </div>
+
+                    <!-- Category Tabs -->
+                    <div class="flex gap-2 mb-4">
+                        <button onclick="setCategory('face')" id="cat-face" class="cat-tab active flex-1 py-3 rounded-lg text-sm font-bold border border-brand-200 flex items-center justify-center gap-2">
+                            <i class="ph ph-smiley"></i> フェイス
+                        </button>
+                        <button onclick="setCategory('body')" id="cat-body" class="cat-tab flex-1 py-3 rounded-lg text-sm font-bold text-brand-500 border border-brand-200 flex items-center justify-center gap-2">
+                            <i class="ph ph-person-arms-spread"></i> ボディ
+                        </button>
                     </div>
 
-                    <div class="bg-brand-50/50 p-4 border border-brand-100 rounded-lg shadow-sm">
-                        <p class="text-xs font-bold text-brand-500 border-b border-brand-100 pb-2 mb-3">オプション (複数選択可)</p>
-                        <div class="grid grid-cols-1 gap-2">
-                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-white p-1 rounded transition">
-                                <input type="checkbox" class="option-checkbox form-checkbox text-brand-400 rounded focus:ring-brand-400" value="スカルプケア" onchange="updateUI()">
-                                <span class="text-sm text-brand-700">スカルプケア</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-white p-1 rounded transition">
-                                <input type="checkbox" class="option-checkbox form-checkbox text-brand-400 rounded focus:ring-brand-400" value="ハイドラ" onchange="updateUI()">
-                                <span class="text-sm text-brand-700">ハイドラ</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-white p-1 rounded transition">
-                                <input type="checkbox" class="option-checkbox form-checkbox text-brand-400 rounded focus:ring-brand-400" value="EMS" onchange="updateUI()">
-                                <span class="text-sm text-brand-700">EMS</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-white p-1 rounded transition">
-                                <input type="checkbox" class="option-checkbox form-checkbox text-brand-400 rounded focus:ring-brand-400" value="ラジオ波/RF" onchange="updateUI()">
-                                <span class="text-sm text-brand-700">ラジオ波/RF</span>
-                            </label>
-                            <label class="flex items-center space-x-2 cursor-pointer hover:bg-white p-1 rounded transition">
-                                <input type="checkbox" class="option-checkbox form-checkbox text-brand-400 rounded focus:ring-brand-400" value="プラズマ" onchange="updateUI()">
-                                <span class="text-sm text-brand-700">プラズマ</span>
-                            </label>
+                    <!-- Menu Selection -->
+                    <div id="menuContainer" class="bg-white p-4 border border-brand-200 rounded-lg shadow-sm">
+                        <p class="text-xs font-bold text-brand-500 border-b border-brand-100 pb-2 mb-3">本日のメニュー</p>
+                        <div id="menuRadioGroup" class="space-y-2">
+                            <!-- Dynamically generated -->
                         </div>
                     </div>
                 </section>
@@ -246,169 +245,29 @@
                     <h3 class="text-sm font-serif font-bold text-brand-600 border-l-4 border-brand-400 pl-2 mb-3 flex items-center gap-2">
                         <i class="ph ph-chart-polar"></i> 分析チャート
                     </h3>
-                    
-                    <!-- Report Type Selector (Tabs) -->
-                    <div class="flex bg-brand-50 p-1 rounded-lg border border-brand-100 mb-4">
-                        <button onclick="setReportType('skin')" id="type-skin" class="flex-1 py-2 text-xs font-bold rounded tab-button active">
-                            肌診断
-                        </button>
-                        <button onclick="setReportType('face')" id="type-face" class="flex-1 py-2 text-xs font-bold rounded tab-button text-brand-400">
-                            小顔矯正
-                        </button>
-                        <button onclick="setReportType('both')" id="type-both" class="flex-1 py-2 text-xs font-bold rounded tab-button text-brand-400">
-                            肌診断＋小顔矯正
-                        </button>
-                    </div>
 
-                    <!-- SKIN INPUTS -->
-                    <div id="inputs-skin" class="space-y-4 bg-white p-4 border border-brand-100 rounded-lg mb-4 shadow-sm">
-                        <p class="text-xs text-brand-500 font-bold border-b border-brand-100 pb-2 mb-2">肌バランス (初期値:1)</p>
-                        <!-- Moisture -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">水分量・潤い</label>
-                                <span id="valMoisture" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scoreMoisture" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
-                        </div>
-                        <!-- Pores -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">毛穴・キメ</label>
-                                <span id="valPores" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scorePores" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
-                        </div>
-                        <!-- Firmness -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">ハリ・弾力</label>
-                                <span id="valFirmness" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scoreFirmness" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
-                        </div>
-                        <!-- Tone -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">透明感・巡り</label>
-                                <span id="valTone" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scoreTone" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
-                        </div>
-                        <!-- Balance -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">バランス・滑らかさ</label>
-                                <span id="valBalance" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scoreBalance" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
-                        </div>
-                    </div>
-
-                    <!-- FACE INPUTS -->
-                    <div id="inputs-face" class="space-y-4 bg-white p-4 border border-brand-100 rounded-lg shadow-sm hidden">
-                        <p class="text-xs text-brand-500 font-bold border-b border-brand-100 pb-2 mb-2">小顔・矯正バランス (初期値:1)</p>
-                        <!-- Asymmetry -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">左右バランス</label>
-                                <span id="valFaceAsym" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scoreFaceAsym" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
-                        </div>
-                        <!-- Swelling -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">むくみケア</label>
-                                <span id="valFaceSwell" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scoreFaceSwell" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
-                        </div>
-                        <!-- Distortion -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">骨格の歪み</label>
-                                <span id="valFaceDist" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scoreFaceDist" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
-                        </div>
-                        <!-- Muscle -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">筋肉の柔軟性</label>
-                                <span id="valFaceMuscle" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scoreFaceMuscle" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
-                        </div>
-                        <!-- Line -->
-                        <div class="relative">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-xs font-bold text-brand-700">フェイスライン</label>
-                                <span id="valFaceLine" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
-                            </div>
-                            <input type="range" id="scoreFaceLine" min="1" max="5" step="1" value="1" class="w-full" oninput="updateCharts()">
+                    <div id="chartInputsWrapper" class="space-y-4 bg-white p-4 border border-brand-100 rounded-lg shadow-sm">
+                        <p class="text-xs text-brand-500 font-bold border-b border-brand-100 pb-2 mb-2">各項目の評価 (1〜5)</p>
+                        <div id="chartInputs" class="space-y-4">
+                            <!-- Dynamically generated -->
                         </div>
                     </div>
                 </section>
 
-                <!-- 4. Diagnosis & Feedback -->
+                <!-- 4. Feedback & Advice -->
                 <section class="space-y-4">
                     <h3 class="text-sm font-serif font-bold text-brand-600 border-l-4 border-brand-400 pl-2 flex items-center gap-2">
                         <i class="ph ph-chat-centered-text"></i> フィードバック・アドバイス
                     </h3>
 
-                    <!-- Manual Template Selection -->
-                    <div class="bg-white p-3 border border-brand-200 rounded-lg">
-                        <label class="block text-xs font-bold mb-2 text-brand-500">テンプレートから選ぶ (手動)</label>
-                        <select id="diagnosisTemplate" class="w-full border border-brand-300 rounded p-2 text-xs bg-brand-50 text-brand-800 focus:ring-1 focus:ring-brand-400 outline-none" onchange="applyTemplate()">
-                            <option value="">▼ 選択してください</option>
-                            <optgroup label="顔・骨格 (小顔矯正)">
-                                <option value="asymmetry">【顔】左右差（噛み癖・姿勢）</option>
-                                <option value="swelling">【顔】小顔・むくみ（水分・塩分）</option>
-                                <option value="jaw">【顔】エラ張り・食いしばり</option>
-                                <option value="double_chin">【顔】二重顎・首元の滞り</option>
-                                <option value="scalp">【頭】頭皮の硬さ・眼精疲労</option>
-                            </optgroup>
-                            <optgroup label="肌質悩み (肌診断)">
-                                <option value="roughness">【肌】ごわつき（乾燥・摩擦）</option>
-                                <option value="firmness">【肌】ハリ弾力不足</option>
-                                <option value="dullness">【肌】くすみ・血行不良</option>
-                                <option value="dryness">【肌】乾燥・水分不足</option>
-                                <option value="oily">【肌】皮脂・テカリ</option>
-                            </optgroup>
-                            <optgroup label="毛穴悩み">
-                                <option value="pores_open">【毛穴】開き（インナードライ）</option>
-                                <option value="pores_black">【毛穴】黒ずみ（酸化）</option>
-                                <option value="pores_sagging">【毛穴】たるみ（筋力低下）</option>
-                            </optgroup>
-                        </select>
-                    </div>
-
-                    <!-- AI Generation Button -->
-                    <div class="bg-gradient-to-br from-brand-50 to-white p-3 rounded-lg border border-brand-200">
-                        <div id="aiControl">
-                            <div class="flex justify-between items-center mb-2">
-                                <label class="text-xs font-bold text-brand-500 flex items-center gap-1">
-                                    <i class="ph-fill ph-magic-wand"></i> AI自動生成 (Gemini)
-                                </label>
-                            </div>
-                            <textarea id="aiPromptNote" class="w-full border border-brand-200 rounded p-2 text-xs bg-white mb-2" placeholder="特記事項があれば入力 (例: 結婚式が近い、育児疲れがある等)" rows="1"></textarea>
-                            <button onclick="generateAIContent()" id="aiBtn" class="w-full bg-brand-400 text-white py-2 rounded-lg text-xs font-bold hover:bg-brand-500 transition flex justify-center items-center gap-2 shadow-sm">
-                                <span>✨ チャートから文章をAI生成</span>
-                            </button>
-                            <p id="aiError" class="text-[10px] text-red-400 mt-2 hidden"></p>
-                        </div>
-                    </div>
-
-                    <!-- Text Areas -->
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs font-bold mb-1 text-brand-500">フィードバック (編集可)</label>
-                            <textarea id="feedbackText" class="w-full border border-brand-200 rounded p-3 text-sm h-32 focus:ring-1 focus:ring-brand-400 outline-none resize-y bg-white" placeholder="ここに文章が入ります..." oninput="updateUI()"></textarea>
+                            <textarea id="feedbackText" class="w-full border border-brand-200 rounded p-3 text-sm h-32 focus:ring-1 focus:ring-brand-400 outline-none resize-y bg-white" placeholder="施術後のフィードバックを入力..." oninput="updateUI()"></textarea>
                         </div>
                         <div>
                             <label class="block text-xs font-bold mb-1 text-brand-500">ホームケア・アドバイス (編集可)</label>
-                            <textarea id="careText" class="w-full border border-brand-200 rounded p-3 text-sm h-32 focus:ring-1 focus:ring-brand-400 outline-none resize-y bg-white" placeholder="ここに文章が入ります..." oninput="updateUI()"></textarea>
+                            <textarea id="careText" class="w-full border border-brand-200 rounded p-3 text-sm h-32 focus:ring-1 focus:ring-brand-400 outline-none resize-y bg-white" placeholder="ホームケアのアドバイスを入力..." oninput="updateUI()"></textarea>
                         </div>
                     </div>
                 </section>
@@ -433,33 +292,37 @@
                     <h3 class="text-sm font-serif font-bold text-brand-600 border-l-4 border-brand-400 pl-2 mb-4 flex items-center gap-2">
                         <i class="ph ph-ticket"></i> 次回特典クーポン
                     </h3>
-                    
+
                     <div class="bg-brand-50 p-4 rounded-lg border border-brand-100 shadow-sm">
                         <div class="mb-3">
                             <label class="block text-xs font-bold mb-1 text-brand-500">メニュー選択</label>
                             <select id="couponSelect" class="w-full border border-brand-200 rounded p-2 text-sm bg-white focus:ring-1 focus:ring-brand-400 outline-none text-brand-800" onchange="handleCouponSelect()">
                                 <option value="none">クーポンなし</option>
-                                <option value="cp1">1. 小顔矯正＋ドライヘッドスパ</option>
-                                <option value="cp2">2. 幹細胞ハーブピーリング</option>
-                                <option value="cp3">3. 小顔矯正＋ヘッドスパ＋OP1つ</option>
-                                <option value="cp4">4. 幹細胞ハーブピーリング＋OP1つ</option>
-                                <option value="cp5">5. よもぎ蒸し</option>
+                                <optgroup label="フェイス">
+                                    <option value="cp1">小顔矯正</option>
+                                    <option value="cp2">フェイシャル</option>
+                                    <option value="cp3">小顔矯正＋フェイシャル</option>
+                                </optgroup>
+                                <optgroup label="ボディ">
+                                    <option value="cp4">痩身機器×骨盤矯正</option>
+                                    <option value="cp5">骨盤矯正</option>
+                                    <option value="cp6">プレミアム矯正</option>
+                                </optgroup>
                             </select>
                         </div>
 
-                        <!-- Option Selector (Only for CP3 & CP4) -->
-                        <div id="optionSelectWrapper" class="mb-3 hidden">
-                            <label class="block text-xs font-bold mb-1 text-brand-500">オプション選択</label>
-                            <select id="optionSelect" class="w-full border border-brand-200 rounded p-2 text-sm bg-white focus:ring-1 focus:ring-brand-400 outline-none text-brand-800" onchange="updateUI()">
-                                <option value="スカルプケア（頭皮EMS）">スカルプケア（頭皮EMS）</option>
-                                <option value="ハイドラ（毛穴洗浄/ざらつきケア）">ハイドラ（毛穴洗浄/ざらつきケア）</option>
-                                <option value="EMS（リフトアップ/引き締め）">EMS（リフトアップ/引き締め）</option>
-                                <option value="ラジオ波/RF（小顔/たるみケア）">ラジオ波/RF（小顔/たるみケア）</option>
-                                <option value="プラズマ（殺菌/鎮静/シミケア）">プラズマ（殺菌/鎮静/シミケア）</option>
-                            </select>
+                        <div class="grid grid-cols-2 gap-3 mb-3">
+                            <div>
+                                <label class="block text-xs font-bold mb-1 text-brand-500">通常価格 (税込)</label>
+                                <input type="number" id="couponOldPrice" class="w-full border border-brand-200 rounded p-2 text-sm bg-white focus:ring-1 focus:ring-brand-400 outline-none text-brand-800" placeholder="例: 15000" oninput="updateUI()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1 text-brand-500">特別価格 (税込)</label>
+                                <input type="number" id="couponNewPrice" class="w-full border border-brand-200 rounded p-2 text-sm bg-white focus:ring-1 focus:ring-brand-400 outline-none text-brand-800" placeholder="例: 11000" oninput="updateUI()">
+                            </div>
                         </div>
 
-                        <div class="mt-3 pt-3 border-t border-brand-200">
+                        <div class="pt-3 border-t border-brand-200">
                              <label class="block text-xs font-bold mb-1 text-brand-500">有効期限 (来店日から1ヶ月後を推奨)</label>
                              <div class="flex items-center gap-2">
                                 <input type="date" id="nextReservationDate" class="w-full border border-brand-200 rounded p-2 text-sm text-gray-600 bg-white" oninput="updateUI()">
@@ -474,13 +337,13 @@
 
         <!-- RIGHT PANEL: PREVIEW -->
         <main id="panel-preview" class="w-full md:w-1/2 lg:w-7/12 bg-brand-100 h-full overflow-y-auto custom-scroll relative hidden md:block">
-            
+
             <div class="flex flex-col items-center justify-start min-h-full p-4 md:p-8 pb-20">
-                
+
                 <!-- DOWNLOAD BUTTON -->
                 <div class="sticky top-0 z-50 w-full max-w-[420px] flex justify-end mb-4 pointer-events-none">
                     <div class="pointer-events-auto shadow-xl rounded-full">
-                        <button onclick="downloadImage()" class="flex items-center gap-2 bg-brand-400 text-white px-6 py-2.5 rounded-full hover:bg-brand-500 transition font-bold text-sm border-2 border-white tracking-wide">
+                        <button onclick="downloadImage()" class="flex items-center gap-2 text-white px-6 py-2.5 rounded-full hover:opacity-90 transition font-bold text-sm border-2 border-white tracking-wide" style="background: linear-gradient(135deg, #c4a96c 0%, #a68d52 100%);">
                             <i class="ph ph-download-simple text-lg"></i> 画像を保存
                         </button>
                     </div>
@@ -491,56 +354,45 @@
 
                 <!-- PREVIEW CARD -->
                 <div id="captureArea" class="bg-white w-full max-w-[420px] shadow-2xl relative text-brand-800 overflow-hidden" style="min-height: 800px;">
-                    
-                    <!-- Texture Overlay -->
-                    <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: radial-gradient(#dba9a8 1px, transparent 1px); background-size: 20px 20px;"></div>
 
-                    <!-- Top Border -->
-                    <div class="h-2 bg-brand-400 w-full"></div>
+                    <!-- Subtle Pattern Overlay -->
+                    <div class="absolute inset-0 pointer-events-none opacity-[0.06]" style="background-image: radial-gradient(#c4a96c 0.8px, transparent 0.8px); background-size: 16px 16px;"></div>
+
+                    <!-- Top Border (Gold Gradient) -->
+                    <div class="h-2 w-full" style="background: linear-gradient(90deg, #c4a96c 0%, #d9c48a 50%, #c4a96c 100%);"></div>
 
                     <!-- Header -->
                     <div class="p-8 pb-4 text-center relative z-10">
                         <div class="mb-3">
-                             <h1 class="vivie-logo text-4xl text-brand-400 font-medium inline-block relative tracking-widest">
-                                vivie
-                                <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-8 h-[1px] bg-brand-200"></span>
+                             <p class="text-[10px] text-brand-400 tracking-[0.35em] uppercase font-bold mb-1">Premium</p>
+                             <h1 class="salon-logo text-2xl text-brand-400 font-semibold inline-block relative tracking-[0.2em]">
+                                Body Balance
+                                <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-10 h-[1px] bg-brand-300"></span>
                             </h1>
                         </div>
-                        <p class="text-[10px] text-brand-400 tracking-[0.3em] uppercase font-bold mb-4 mt-4">Beauty Report</p>
-                        
+                        <p class="text-[10px] text-brand-400 tracking-[0.3em] uppercase font-bold mb-4 mt-5">Beauty Report</p>
+
                         <h2 class="text-xl font-serif text-brand-700 tracking-wide mb-1">
                             <span id="previewName" class="font-medium border-b border-brand-300">Guest</span> <span class="text-sm">様</span>
                         </h2>
                         <p class="text-[10px] text-brand-500 mt-2">ご来店日: <span id="previewDate" class="font-bold font-serif text-sm">2023.00.00</span></p>
-                    
-                        <!-- Display Selected Menu & Options -->
-                        <div id="previewMenuArea" class="mt-4 hidden">
+
+                        <!-- Display Selected Menu -->
+                        <div id="previewMenuArea" class="mt-4">
                             <div class="decoration-line"><span>Today's Menu</span></div>
                             <div class="flex flex-col items-center gap-2">
-                                <div id="previewMenuList" class="flex flex-wrap justify-center gap-2"></div>
-                                <div id="previewOptionList" class="flex flex-wrap justify-center gap-1 mt-1"></div>
+                                <span id="previewMenuLabel" class="text-[11px] bg-brand-50 text-brand-700 px-3 py-1 rounded border border-brand-200 font-bold"></span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Chart Section -->
                     <div class="px-6 mb-6 relative z-10" id="previewChartsArea">
-                        <!-- Skin Chart -->
-                        <div id="container-skin-chart" class="mb-4">
-                            <div class="decoration-line"><span>Skin Balance</span></div>
+                        <div class="mb-4">
+                            <div class="decoration-line"><span id="previewChartTitle">Analysis</span></div>
                             <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 border border-brand-100 shadow-sm">
-                                <div class="chart-wrapper">
-                                    <canvas id="chartSkin"></canvas>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Face Chart -->
-                        <div id="container-face-chart" class="mb-4">
-                            <div class="decoration-line"><span>Face Balance</span></div>
-                            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-2 border border-brand-100 shadow-sm">
-                                <div class="chart-wrapper">
-                                    <canvas id="chartFace"></canvas>
+                                <div class="chart-wrapper" id="chartWrapperDiv" style="height: 240px;">
+                                    <canvas id="mainChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -584,24 +436,19 @@
                         </div>
                     </div>
 
-                    <!-- Coupon Section (Premium) -->
-                    <div class="bg-brand-50 pt-6 pb-10 px-6 relative mt-4">
+                    <!-- Coupon Section -->
+                    <div class="pt-6 pb-10 px-6 relative mt-4" style="background: linear-gradient(180deg, #f2ece0 0%, #faf8f1 100%);">
                         <div class="absolute top-0 left-0 w-full h-px bg-brand-200"></div>
 
                         <div id="previewCouponArea" class="hidden mb-8">
                             <div class="coupon-premium p-5 shadow-md bg-white">
                                 <p class="text-[9px] tracking-[0.3em] text-brand-400 uppercase text-center mb-1">Special Ticket</p>
                                 <h5 id="previewCouponName" class="text-base font-serif font-bold text-brand-700 text-center leading-tight mb-3">Coupon Name</h5>
-                                
-                                <div id="previewOptionArea" class="text-center mb-3 hidden">
-                                    <span class="text-[10px] bg-brand-100 text-brand-600 px-2 py-0.5 rounded">Option</span>
-                                    <p id="previewOptionName" class="text-xs font-bold text-brand-600 mt-1">Option Name</p>
-                                </div>
 
                                 <div class="flex items-center justify-center gap-3 border-t border-dashed border-brand-200 pt-3 mb-3">
-                                    <span id="oldPrice" class="text-xs text-gray-400 line-through">¥11,000</span>
-                                    <span class="text-gray-300 text-xs">▶</span>
-                                    <span id="newPrice" class="text-2xl font-serif font-bold text-brand-600">¥8,800</span>
+                                    <span id="oldPrice" class="text-xs text-gray-400 line-through">¥0</span>
+                                    <span class="text-brand-300 text-xs">▶</span>
+                                    <span id="newPrice" class="text-2xl font-serif font-bold text-brand-600">¥0</span>
                                 </div>
 
                                 <div class="text-center">
@@ -615,7 +462,8 @@
                                 本日は貴重なお時間をいただき<br>ありがとうございました。<br>
                                 またのご来店を心よりお待ちしております。
                             </p>
-                            <h3 class="vivie-logo text-lg text-brand-400">vivie</h3>
+                            <p class="text-[9px] text-brand-400 tracking-[0.3em] uppercase font-bold mb-0.5">Premium</p>
+                            <h3 class="salon-logo text-base text-brand-400 tracking-[0.15em]">Body Balance</h3>
                         </div>
                     </div>
 
@@ -627,83 +475,67 @@
     <!-- SCRIPTS -->
     <script>
         // ==========================================
-        // ★設定: 手順1で作ったGASのURLをここに貼る
+        // MENU & CHART CONFIGURATION
         // ==========================================
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbx90TGj9ynXVZKYy98G_TWY-VIlbtRhpN3U7TBsNWbCyi2-8My6rAz9aI35g69N28Ih/exec"; 
-
-        // CONFIG
-        const COLOR_PRIMARY = '#dba9a8';
-        const COLOR_BG = 'rgba(219, 169, 168, 0.2)';
-        
-        // GLOBAL STATE
-        let skinChart = null;
-        let faceChart = null;
-        let currentMode = 'skin'; // skin, face, both
-        
-        // MANUAL TEMPLATE DATA
-        const feedbackData = {
-            asymmetry: {
-                feedback: "【お顔のバランスについて】\n拝見したところ、お顔の左右差が少し見受けられました。\nこれは、片側の筋肉を無意識に使ってしまう「噛み癖」や、寝ている間の姿勢などが主な原因と考えられます。\n本日は張りが強い側を重点的にほぐし、バランスを整えるケアを行いました。",
-                care: "左右差リセットマッサージ：\n張っている側（硬い方）の咬筋を、指2本で円を描くように30秒ほど優しくほぐしてください。\n「痛気持ちいい」強さが目安です。お風呂上がりに行うと効果的です。"
+        const menuConfig = {
+            face: {
+                label: 'フェイス',
+                chartTitle: 'Face Analysis',
+                menus: [
+                    {
+                        id: 'kogao',
+                        label: '小顔矯正',
+                        chartLabels: ['むくみケア', '筋肉の柔軟性', '骨格の歪み', '中顔面の長さ', '姿勢バランス'],
+                        inputLabels: ['むくみケア', '筋肉の柔軟性', '骨格の歪み', '中顔面の長さ', '姿勢バランス（反り腰・猫背・巻き肩・ストレートネック）']
+                    },
+                    {
+                        id: 'facial',
+                        label: 'フェイシャル',
+                        chartLabels: ['水分量・潤い', '毛穴・キメ', 'ハリ・弾力', '透明感'],
+                        inputLabels: ['水分量・潤い', '毛穴・キメ', 'ハリ・弾力', '透明感']
+                    },
+                    {
+                        id: 'face_both',
+                        label: '小顔矯正＋フェイシャル',
+                        chartLabels: ['フェイスライン', 'むくみケア', '筋肉の柔軟性', '骨格の歪み', '中顔面の長さ', '姿勢バランス', '水分量・潤い', '毛穴・キメ', 'ハリ・弾力', '透明感'],
+                        inputLabels: ['フェイスライン', 'むくみケア', '筋肉の柔軟性', '骨格の歪み', '中顔面の長さ', '姿勢バランス（反り腰・猫背・巻き肩・ストレートネック）', '水分量・潤い', '毛穴・キメ', 'ハリ・弾力', '透明感']
+                    }
+                ]
             },
-            swelling: {
-                feedback: "【むくみについて】\n全体的に水分が滞りやすく、むくみが出やすい状態でした。\nお顔のむくみは、塩分の摂りすぎや水分不足、冷えなどが重なると起こりやすくなります。\n本日はリンパの流れを促進し、スッキリとしたフェイスラインになるよう施術いたしました。",
-                care: "耳の下から鎖骨に向かって、指の腹で優しくなでるように流してください（5回程度）。\nオイルやクリームを使い、摩擦が起きないように行うのがポイントです。"
-            },
-            jaw: {
-                feedback: "【食いしばり・エラについて】\n咬筋（エラの部分）に強い張りが見られました。\n無意識の食いしばりや、歯ぎしりなどが原因で筋肉が凝り固まっている可能性があります。\n本日は凝り固まった筋肉を深部から緩め、フェイスラインが柔らかくなるよう整えました。",
-                care: "日中、ふとした瞬間に奥歯が触れ合っていないか意識してみてください。\n食いしばりに気づいたら、一度大きく息を吐いて肩と顎の力を抜きましょう。"
-            },
-            double_chin: {
-                feedback: "【首元・フェイスラインについて】\n顎下の筋肉が少し硬くなっており、リンパの流れが滞りやすい状態でした。\nスマートフォンの長時間使用や、下を向く姿勢が続くと二重顎の原因になりやすくなります。\n本日は首元からしっかりと流し、巡りを良くするケアを行いました。",
-                care: "30分〜1時間に一度は、天井を見上げるように首の前側を伸ばすストレッチを取り入れてみてください。\n首の詰まりを取ることで、フェイスラインがスッキリします。"
-            },
-            scalp: {
-                feedback: "【頭皮の状態について】\n頭皮全体が非常に硬くなっており、お疲れが溜まっているご様子でした。\n頭皮の硬さは、眼精疲労やストレスからくる緊張が主な原因です。\n本日は頭のコリを丁寧にほぐし、リラックスしていただけるよう施術いたしました。",
-                care: "シャンプーの際、指の腹を使って頭皮全体を動かすようにマッサージしてみてください。\nこめかみ付近をくるくるとほぐすだけでも、目の疲れが和らぎます。"
-            },
-            roughness: {
-                feedback: "【肌の質感について】\nお肌の表面が少し硬く、ごわつきを感じる状態でした。\n乾燥や摩擦などの影響で、お肌が自らを守ろうとして角質が厚くなっている可能性があります。\n本日は古い角質をケアし、水分が入りやすい柔らかいお肌へ導く施術を行いました。",
-                care: "洗顔時は「こすらない」ことを意識し、たっぷりの泡で優しく洗ってください。\n化粧水は手で包み込むように、ゆっくりとハンドプレスして浸透させましょう。\nおすすめ成分：セラミド、アミノ酸"
-            },
-            firmness: {
-                feedback: "【ハリ・弾力について】\n頬の内側の弾力が少し低下しており、押し返す力が弱まっている状態でした。\nお肌の土台となるコラーゲンやエラスチンの機能が、乾燥などにより低下していることが考えられます。\n本日は内側からふっくらとしたハリが出るよう、栄養導入を中心にケアいたしました。",
-                care: "保湿ケアを徹底し、お肌の水分量を高めることが大切です。\nスマホを見る際は顎を引き、首を伸ばす姿勢を意識するとハリの低下予防になります。\nおすすめ成分：レチノール、ペプチド"
-            },
-            dullness: {
-                feedback: "【お肌のトーンについて】\n血行不良により、お肌本来の透明感が出にくい状態でした。\n冷えや寝不足、乾燥などが重なると、ターンオーバーが乱れてくすみの原因となります。\n本日は血行促進のマッサージを行い、ワントーン明るいお肌になるよう仕上げました。",
-                care: "首やデコルテを冷やさないようにし、深い呼吸を意識してみてください。\n酸素が巡ることで、顔色が明るく見えやすくなります。\nおすすめ成分：ビタミンC誘導体、ナイアシンアミド"
-            },
-            dryness: {
-                feedback: "【水分量について】\nお肌の水分保持力が低下しており、非常に乾燥しやすい状態でした。\nバリア機能が弱まっているため、外部刺激を受けやすくなっています。\n本日は高保湿パックを使用し、お肌の深部までたっぷりと潤いを届けるケアを行いました。",
-                care: "化粧水は一度に大量につけるのではなく、少量を数回に分けて重ね付けするのがおすすめです。\n最後は必ずクリーム等で蓋をして、水分を逃さないようにしましょう。\nおすすめ成分：ヒアルロン酸、セラミド"
-            },
-            oily: {
-                feedback: "【皮脂バランスについて】\n皮脂の分泌が多く、テカリが出やすい状態でした。\n一見オイリーに見えますが、内側の乾燥（インナードライ）を補おうとして皮脂が出ている可能性があります。\n本日は水分と油分のバランスを整えるケアを中心に行いました。",
-                care: "乳液やクリームは全顔に均一に塗るのではなく、Tゾーンなど油分が多い部分は薄めに塗ってください。\nあぶらとり紙の使いすぎは逆効果になるため、ティッシュオフ程度に留めましょう。\nおすすめ成分：ビタミンC誘導体"
-            },
-            pores_open: {
-                feedback: "【毛穴の状態について】\n頬周りの毛穴の開きが少し目立つ状態でした。\n水分不足によりお肌のキメが乱れ、毛穴が目立ってしまっていると考えられます。\n本日は毛穴を引き締め、キメを整える導入ケアを行いました。",
-                care: "洗顔後は時間を置かずにすぐ保湿を行うことが重要です。\n「冷やす」よりも「潤いで満たす」ことを意識してケアしてください。\nおすすめ成分：ビタミンC誘導体、グリシルグリシン"
-            },
-            pores_black: {
-                feedback: "【毛穴の状態について】\n小鼻周りの黒ずみ（角栓の酸化）が少し気になりました。\n落としきれていないメイク汚れや皮脂が酸化し、毛穴に詰まっている状態です。\n本日は汚れを優しく浮かせ、毛穴の大掃除をするケアを行いました。",
-                care: "クレンジングはゴシゴシ擦らず、優しく馴染ませてください。\n週に1回程度の酵素洗顔などを取り入れるのもおすすめです。\n洗浄後は必ずたっぷり保湿をしましょう。"
-            },
-            pores_sagging: {
-                feedback: "【毛穴の状態について】\n頬の毛穴が縦長に伸びている「たるみ毛穴」の兆候が見られました。\nお肌のハリ不足や表情筋の衰えにより、毛穴が下へ引っ張られている状態です。\n本日はリフトアップケアを行い、毛穴を目立ちにくくする施術をいたしました。",
-                care: "スキンケアの最後は、頬を下から上へ持ち上げるようにハンドプレスしてみてください。\n頭皮マッサージを行い、お顔全体を引き上げるのも効果的です。\nおすすめ成分：レチノール、ナイアシンアミド"
+            body: {
+                label: 'ボディ',
+                chartTitle: 'Body Analysis',
+                menus: [
+                    {
+                        id: 'slimming',
+                        label: '痩身機器×骨盤矯正',
+                        chartLabels: ['脂肪の厚み・質', 'むくみ・リンパ', '筋肉の柔軟性', '骨盤の歪み', '姿勢バランス', '代謝・冷え', 'ヒップ・ウエスト'],
+                        inputLabels: ['脂肪の厚み・質', 'むくみ・リンパ循環', '筋肉の張り・柔軟性', '骨盤の歪み・左右差', '姿勢バランス（反り腰・猫背）', '代謝・冷え', 'ヒップライン・ウエストライン']
+                    },
+                    {
+                        id: 'pelvis',
+                        label: '骨盤矯正',
+                        chartLabels: ['骨盤の歪み', '左右バランス', '姿勢', '股関節・可動域', '腰・背中の緊張', '下半身のむくみ', '体の軸・安定感'],
+                        inputLabels: ['骨盤の歪み・傾き', '左右バランス', '姿勢（反り腰・猫背）', '股関節・可動域', '腰・背中の緊張', '下半身のむくみ', '体の軸・安定感']
+                    },
+                    {
+                        id: 'premium',
+                        label: 'プレミアム矯正',
+                        chartLabels: ['むくみ・リンパ', '筋肉の柔軟性', '骨盤・骨格の歪み', '姿勢バランス'],
+                        inputLabels: ['むくみ・リンパ循環', '筋肉の張り・柔軟性', '骨盤、骨格の歪み・左右差', '姿勢バランス（反り腰・猫背・巻き肩・ストレートネック）']
+                    }
+                ]
             }
         };
 
-        // COUPON DATA
-        const coupons = {
-            cp1: { name: "小顔矯正＋ドライヘッドスパ", old: 11000, new: 8800, hasOption: false },
-            cp2: { name: "幹細胞ハーブピーリング", old: 11000, new: 8800, hasOption: false },
-            cp3: { name: "小顔矯正＋ドライヘッドスパ＋OP", old: 16500, new: 11000, hasOption: true },
-            cp4: { name: "幹細胞ハーブピーリング＋OP", old: 16500, new: 11000, hasOption: true },
-            cp5: { name: "よもぎ蒸し", old: 5500, new: 3500, hasOption: false },
-        };
+        // CONFIG
+        const COLOR_PRIMARY = '#c4a96c';
+        const COLOR_BG = 'rgba(196, 169, 108, 0.2)';
+
+        // GLOBAL STATE
+        let mainChart = null;
+        let currentCategory = 'face';
+        let currentMenuId = 'kogao';
 
         // --- INIT ---
         window.onload = function() {
@@ -711,211 +543,99 @@
             document.getElementById('visitDate').value = today;
             calcNextDate(today);
 
-            initCharts();
-            setReportType('skin'); // Default
+            setCategory('face');
             updateUI();
         };
 
-        // --- TEMPLATE LOGIC ---
-        function applyTemplate() {
-            const key = document.getElementById('diagnosisTemplate').value;
-            const feedbackArea = document.getElementById('feedbackText');
-            const careArea = document.getElementById('careText');
-            
-            if (key && feedbackData[key]) {
-                feedbackArea.value = feedbackData[key].feedback;
-                careArea.value = feedbackData[key].care;
-                updateUI();
-            }
-        }
+        // --- CATEGORY & MENU ---
+        function setCategory(cat) {
+            currentCategory = cat;
 
-        // --- AI LOGIC (SECURE MODE) ---
-        async function generateAIContent() {
-            const errorMsg = document.getElementById('aiError');
-            const btn = document.getElementById('aiBtn');
-            const note = document.getElementById('aiPromptNote').value;
-            
-            errorMsg.classList.add('hidden');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="ph ph-spinner animate-spin"></i> 生成中...';
-
-            // Gather Selected Menus for context
-            const menuChecks = document.querySelectorAll('.menu-checkbox:checked');
-            const optionChecks = document.querySelectorAll('.option-checkbox:checked');
-            let selectedMenus = [];
-            menuChecks.forEach(c => selectedMenus.push(c.value));
-            optionChecks.forEach(c => selectedMenus.push(c.value));
-            const todayMenuStr = selectedMenus.length > 0 ? selectedMenus.join("、") : "特になし";
-
-            // Define Menu List for AI Suggestion
-            const menuListText = `
-            [vivieの提供メニュー]
-            - 小顔矯正＋ドライヘッドスパ
-            - 幹細胞ハーブピーリング
-            - よもぎ蒸し
-            [vivieのオプション]
-            - スカルプケア（頭皮EMS）
-            - ハイドラ（毛穴洗浄/ざらつきケア）
-            - EMS（リフトアップ/引き締め）
-            - ラジオ波/RF（小顔/たるみケア）
-            - プラズマ（殺菌/鎮静/シミケア）
-            `;
-
-            // Gather Data (Prompt Construction)
-            let promptText = `
-                あなたは高級エステサロン「vivie」の経験豊富で知識豊かなプロのエステティシャンです。
-                お客様のレポートを作成するために、以下の情報と特記事項を元に2つの文章を作成してください。
-
-                # 本日行った施術
-                ${todayMenuStr}
-
-                # 出力構成と内容
-                1. 「フィードバック」
-                   - 【重要】「本日はご来店ありがとうございます」などの挨拶や枕詞は一切不要です。直ちに分析内容から始めてください。
-                   - 測定スコアに基づいた現状の分析を簡潔に行ってください。
-                   - 分析結果に基づき、次回受けるべき「vivieの提供メニュー」や「オプション」を具体的に提案し、その理由を一言添えてください。
-                   - 文字数：150文字程度で簡潔に。
-                
-                2. 「ホームケア・アドバイス」
-                   - 肌や骨格のプロとして、お客様が自宅で今日から実行できる具体的で簡単なケアを1つか2つに絞ってアドバイスしてください。
-                   - 文字数：100文字程度で短くまとめてください。
-
-                # vivieのメニューリスト (ここから提案してください)
-                ${menuListText}
-
-                # 条件
-                - 語り口調：簡潔な「です・ます調」。
-                - 記号：絵文字は使用禁止。
-
-                # お客様データ
-                名前: ${document.getElementById('customerName').value}
-                レポートタイプ: ${currentMode === 'both' ? '肌診断と小顔矯正' : (currentMode === 'skin' ? '肌診断' : '小顔矯正')}
-                特記事項: ${note || 'なし'}
-            `;
-
-            if(currentMode === 'skin' || currentMode === 'both') {
-                promptText += `
-                [肌診断スコア(1-5)]
-                水分量: ${document.getElementById('scoreMoisture').value}
-                毛穴: ${document.getElementById('scorePores').value}
-                ハリ: ${document.getElementById('scoreFirmness').value}
-                透明感: ${document.getElementById('scoreTone').value}
-                バランス: ${document.getElementById('scoreBalance').value}
-                `;
-            }
-            if(currentMode === 'face' || currentMode === 'both') {
-                promptText += `
-                [小顔矯正スコア(1-5)]
-                左右差: ${document.getElementById('scoreFaceAsym').value}
-                むくみ: ${document.getElementById('scoreFaceSwell').value}
-                歪み: ${document.getElementById('scoreFaceDist').value}
-                筋肉: ${document.getElementById('scoreFaceMuscle').value}
-                ライン: ${document.getElementById('scoreFaceLine').value}
-                `;
-            }
-
-            promptText += `
-            # 出力フォーマット
-            必ず以下のJSON形式のみで出力してください。Markdownのバッククォートは不要です。
-            {
-                "feedback": "ここにフィードバック文章",
-                "care": "ここにホームケア文章"
-            }
-            `;
-
-            try {
-                // ★ CHANGE: Send Prompt to GAS (not Google directly)
-                // テキスト送信のためPOSTメソッドを使用
-                const response = await fetch(GAS_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain' }, // GASの仕様上 text/plain が安全
-                    body: JSON.stringify({ prompt: promptText })
-                });
-
-                const data = await response.json();
-                
-                if(data.status === "error") throw new Error(data.message);
-                
-                // Clean up markdown if AI adds it (Robustness)
-                let rawText = data.text.replace(/```json/g, '').replace(/```/g, '').trim();
-                const result = JSON.parse(rawText);
-
-                document.getElementById('feedbackText').value = result.feedback;
-                document.getElementById('careText').value = result.care;
-                updateUI();
-
-            } catch (err) {
-                console.error(err);
-                errorMsg.innerText = "エラー: " + err.message;
-                errorMsg.classList.remove('hidden');
-                // GASデプロイ設定の確認を促す
-                if(err.message.includes("Failed to fetch")) {
-                    alert("通信エラー: GASのデプロイ設定が「全員 (Anyone)」になっているか確認してください。");
-                }
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<span>✨ チャートから文章をAI生成</span>';
-            }
-        }
-
-
-        // --- UI LOGIC ---
-        function setReportType(type) {
-            currentMode = type;
-            // Update Tab Styles
-            ['skin', 'face', 'both'].forEach(t => {
-                const btn = document.getElementById('type-' + t);
-                if(t === type) {
+            // Update category tab styles
+            ['face', 'body'].forEach(c => {
+                const btn = document.getElementById('cat-' + c);
+                if (c === cat) {
                     btn.classList.add('active');
-                    btn.classList.remove('text-brand-400');
+                    btn.classList.remove('text-brand-500');
                 } else {
                     btn.classList.remove('active');
-                    btn.classList.add('text-brand-400');
+                    btn.classList.add('text-brand-500');
                 }
             });
 
-            // Toggle Inputs & Previews
-            const iSkin = document.getElementById('inputs-skin');
-            const iFace = document.getElementById('inputs-face');
-            const pSkin = document.getElementById('container-skin-chart');
-            const pFace = document.getElementById('container-face-chart');
+            // Build menu radio buttons
+            buildMenuRadios(cat);
 
-            if(type === 'skin') {
-                iSkin.classList.remove('hidden'); iFace.classList.add('hidden');
-                pSkin.classList.remove('hidden'); pFace.classList.add('hidden');
-            } else if(type === 'face') {
-                iSkin.classList.add('hidden'); iFace.classList.remove('hidden');
-                pSkin.classList.add('hidden'); pFace.classList.remove('hidden');
-            } else {
-                iSkin.classList.remove('hidden'); iFace.classList.remove('hidden');
-                pSkin.classList.remove('hidden'); pFace.classList.remove('hidden');
-            }
-
-            setTimeout(() => {
-                if(skinChart) skinChart.resize();
-                if(faceChart) faceChart.resize();
-            }, 50);
+            // Select first menu by default
+            const firstMenu = menuConfig[cat].menus[0];
+            setMenu(firstMenu.id);
         }
 
-        function calcNextDate(baseDateStr) {
-            if(!baseDateStr) return;
-            const date = new Date(baseDateStr);
-            date.setMonth(date.getMonth() + 1); // +1 Month default
-            const nextStr = date.toISOString().split('T')[0];
-            document.getElementById('nextReservationDate').value = nextStr;
+        function buildMenuRadios(cat) {
+            const container = document.getElementById('menuRadioGroup');
+            container.innerHTML = '';
+
+            menuConfig[cat].menus.forEach((menu, idx) => {
+                const label = document.createElement('label');
+                label.className = 'menu-radio-label flex items-center gap-3 p-3 rounded-lg border border-brand-100 hover:bg-brand-50/50';
+                label.innerHTML = `
+                    <input type="radio" name="menuSelection" value="${menu.id}" class="accent-brand-400" ${idx === 0 ? 'checked' : ''} onchange="setMenu('${menu.id}')">
+                    <span class="menu-radio-text text-sm text-brand-700">${menu.label}</span>
+                `;
+                container.appendChild(label);
+            });
+        }
+
+        function setMenu(menuId) {
+            currentMenuId = menuId;
+
+            // Find menu config
+            const catConfig = menuConfig[currentCategory];
+            const menu = catConfig.menus.find(m => m.id === menuId);
+
+            // Update radio selection
+            const radios = document.querySelectorAll('input[name="menuSelection"]');
+            radios.forEach(r => { r.checked = (r.value === menuId); });
+
+            // Build range slider inputs
+            buildInputs(menu);
+
+            // Rebuild chart
+            rebuildChart(menu);
+
+            // Update preview
+            updateUI();
+        }
+
+        function buildInputs(menu) {
+            const container = document.getElementById('chartInputs');
+            container.innerHTML = '';
+
+            menu.inputLabels.forEach((label, i) => {
+                const div = document.createElement('div');
+                div.className = 'relative';
+                div.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-xs font-bold text-brand-700">${label}</label>
+                        <span id="val_${i}" class="text-xs font-bold text-brand-500 w-4 text-center">1</span>
+                    </div>
+                    <input type="range" id="score_${i}" min="1" max="5" step="1" value="1" class="w-full" oninput="updateChartFromInputs()">
+                `;
+                container.appendChild(div);
+            });
         }
 
         // --- CHARTS ---
-        function initCharts() {
-            const commonOptions = {
+        function getChartOptions() {
+            return {
                 maintainAspectRatio: false,
                 scales: {
                     r: {
-                        angleLines: { color: '#edd5d4' },
-                        grid: { color: '#f5e8e8' },
+                        angleLines: { color: '#e0d4be' },
+                        grid: { color: '#f2ece0' },
                         pointLabels: {
-                            font: { size: 10, family: "'Shippori Mincho', serif" },
-                            color: '#8a5251'
+                            font: { size: 9, family: "'Shippori Mincho', serif" },
+                            color: '#6e5b32'
                         },
                         suggestedMin: 0, suggestedMax: 5,
                         ticks: { display: false, stepSize: 1 }
@@ -923,83 +643,77 @@
                 },
                 plugins: { legend: { display: false } }
             };
-
-            const skinCtx = document.getElementById('chartSkin').getContext('2d');
-            skinChart = new Chart(skinCtx, {
-                type: 'radar',
-                data: {
-                    labels: ['水分量', '毛穴', 'ハリ', '透明感', 'バランス'],
-                    datasets: [{
-                        data: [1,1,1,1,1],
-                        backgroundColor: COLOR_BG, borderColor: COLOR_PRIMARY,
-                        pointBackgroundColor: '#fff', pointBorderColor: COLOR_PRIMARY, borderWidth: 1.5
-                    }]
-                },
-                options: commonOptions
-            });
-
-            const faceCtx = document.getElementById('chartFace').getContext('2d');
-            faceChart = new Chart(faceCtx, {
-                type: 'radar',
-                data: {
-                    labels: ['左右バランス', 'むくみ', '歪み', '筋肉の柔軟性', 'ライン'],
-                    datasets: [{
-                        data: [1,1,1,1,1],
-                        backgroundColor: COLOR_BG, borderColor: COLOR_PRIMARY,
-                        pointBackgroundColor: '#fff', pointBorderColor: COLOR_PRIMARY, borderWidth: 1.5
-                    }]
-                },
-                options: commonOptions
-            });
         }
 
-        function updateCharts() {
-            if(skinChart) {
-                skinChart.data.datasets[0].data = [
-                    document.getElementById('scoreMoisture').value,
-                    document.getElementById('scorePores').value,
-                    document.getElementById('scoreFirmness').value,
-                    document.getElementById('scoreTone').value,
-                    document.getElementById('scoreBalance').value
-                ];
-                // Update text display
-                document.getElementById('valMoisture').innerText = document.getElementById('scoreMoisture').value;
-                document.getElementById('valPores').innerText = document.getElementById('scorePores').value;
-                document.getElementById('valFirmness').innerText = document.getElementById('scoreFirmness').value;
-                document.getElementById('valTone').innerText = document.getElementById('scoreTone').value;
-                document.getElementById('valBalance').innerText = document.getElementById('scoreBalance').value;
-                skinChart.update();
+        function rebuildChart(menu) {
+            if (mainChart) {
+                mainChart.destroy();
+                mainChart = null;
             }
-            if(faceChart) {
-                faceChart.data.datasets[0].data = [
-                    document.getElementById('scoreFaceAsym').value,
-                    document.getElementById('scoreFaceSwell').value,
-                    document.getElementById('scoreFaceDist').value,
-                    document.getElementById('scoreFaceMuscle').value,
-                    document.getElementById('scoreFaceLine').value
-                ];
-                document.getElementById('valFaceAsym').innerText = document.getElementById('scoreFaceAsym').value;
-                document.getElementById('valFaceSwell').innerText = document.getElementById('scoreFaceSwell').value;
-                document.getElementById('valFaceDist').innerText = document.getElementById('scoreFaceDist').value;
-                document.getElementById('valFaceMuscle').innerText = document.getElementById('scoreFaceMuscle').value;
-                document.getElementById('valFaceLine').innerText = document.getElementById('scoreFaceLine').value;
-                faceChart.update();
-            }
-        }
 
-        // --- COUPON & UI ---
-        function handleCouponSelect() {
-            const val = document.getElementById('couponSelect').value;
-            const opWrapper = document.getElementById('optionSelectWrapper');
-            
-            if(val === 'cp3' || val === 'cp4') {
-                opWrapper.classList.remove('hidden');
+            // Adjust chart height based on number of items
+            const wrapperDiv = document.getElementById('chartWrapperDiv');
+            const itemCount = menu.chartLabels.length;
+            if (itemCount <= 5) {
+                wrapperDiv.style.height = '240px';
+            } else if (itemCount <= 7) {
+                wrapperDiv.style.height = '280px';
             } else {
-                opWrapper.classList.add('hidden');
+                wrapperDiv.style.height = '320px';
             }
+
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            const data = new Array(menu.chartLabels.length).fill(1);
+
+            mainChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: menu.chartLabels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: COLOR_BG,
+                        borderColor: COLOR_PRIMARY,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: COLOR_PRIMARY,
+                        borderWidth: 1.5
+                    }]
+                },
+                options: getChartOptions()
+            });
+        }
+
+        function updateChartFromInputs() {
+            const catConfig = menuConfig[currentCategory];
+            const menu = catConfig.menus.find(m => m.id === currentMenuId);
+
+            const data = [];
+            menu.chartLabels.forEach((_, i) => {
+                const val = document.getElementById('score_' + i).value;
+                document.getElementById('val_' + i).innerText = val;
+                data.push(parseInt(val));
+            });
+
+            if (mainChart) {
+                mainChart.data.datasets[0].data = data;
+                mainChart.update();
+            }
+        }
+
+        // --- DATE ---
+        function calcNextDate(baseDateStr) {
+            if (!baseDateStr) return;
+            const date = new Date(baseDateStr);
+            date.setMonth(date.getMonth() + 1);
+            const nextStr = date.toISOString().split('T')[0];
+            document.getElementById('nextReservationDate').value = nextStr;
+        }
+
+        // --- COUPON ---
+        function handleCouponSelect() {
             updateUI();
         }
 
+        // --- UPDATE UI ---
         function updateUI() {
             // Text Fields
             document.getElementById('previewName').innerText = document.getElementById('customerName').value || 'Guest';
@@ -1007,59 +721,31 @@
             document.getElementById('previewFeedback').innerText = document.getElementById('feedbackText').value || "本日はご来店誠にありがとうございます。\nお客様の状態に合わせて、最適なケアをさせていただきました。";
             document.getElementById('previewCare').innerText = document.getElementById('careText').value || "水分を多めに摂り、ゆっくりお休みください。";
 
-            // Menu & Options (New)
-            const menuChecks = document.querySelectorAll('.menu-checkbox:checked');
-            const optionChecks = document.querySelectorAll('.option-checkbox:checked');
-            const menuArea = document.getElementById('previewMenuArea');
-            const menuList = document.getElementById('previewMenuList');
-            const optionList = document.getElementById('previewOptionList');
+            // Menu Label
+            const catConfig = menuConfig[currentCategory];
+            const menu = catConfig.menus.find(m => m.id === currentMenuId);
+            document.getElementById('previewMenuLabel').innerText = menu.label;
 
-            if (menuChecks.length > 0 || optionChecks.length > 0) {
-                menuArea.classList.remove('hidden');
-                menuList.innerHTML = '';
-                optionList.innerHTML = '';
-                
-                // Add Menus
-                menuChecks.forEach(cb => {
-                    const span = document.createElement('span');
-                    span.className = "text-[10px] bg-brand-50 text-brand-700 px-2 py-0.5 rounded border border-brand-200 font-bold";
-                    span.innerText = cb.value;
-                    menuList.appendChild(span);
-                });
-
-                // Add Options
-                optionChecks.forEach(cb => {
-                    const span = document.createElement('span');
-                    span.className = "text-[9px] bg-white text-gray-500 px-2 py-0.5 rounded border border-gray-200";
-                    span.innerText = "+ " + cb.value;
-                    optionList.appendChild(span);
-                });
-            } else {
-                menuArea.classList.add('hidden');
-            }
+            // Chart Title
+            document.getElementById('previewChartTitle').innerText = catConfig.chartTitle;
 
             // Coupon
             const cpVal = document.getElementById('couponSelect').value;
             const cpArea = document.getElementById('previewCouponArea');
-            const opArea = document.getElementById('previewOptionArea');
 
-            if(cpVal !== 'none') {
+            if (cpVal !== 'none') {
                 cpArea.classList.remove('hidden');
-                const data = coupons[cpVal];
-                document.getElementById('previewCouponName').innerText = data.name;
-                document.getElementById('oldPrice').innerText = '¥' + data.old.toLocaleString();
-                document.getElementById('newPrice').innerText = '¥' + data.new.toLocaleString();
+                const selectedOption = document.getElementById('couponSelect').selectedOptions[0];
+                document.getElementById('previewCouponName').innerText = selectedOption.text;
 
-                if(data.hasOption) {
-                    opArea.classList.remove('hidden');
-                    document.getElementById('previewOptionName').innerText = document.getElementById('optionSelect').value;
-                } else {
-                    opArea.classList.add('hidden');
-                }
+                const oldP = parseInt(document.getElementById('couponOldPrice').value) || 0;
+                const newP = parseInt(document.getElementById('couponNewPrice').value) || 0;
+                document.getElementById('oldPrice').innerText = '¥' + oldP.toLocaleString();
+                document.getElementById('newPrice').innerText = '¥' + newP.toLocaleString();
 
                 // Date
                 const d = new Date(document.getElementById('nextReservationDate').value);
-                const expStr = !isNaN(d) ? `${d.getFullYear()}.${(d.getMonth()+1).toString().padStart(2,'0')}.${d.getDate().toString().padStart(2,'0')}` : '--.--.--';
+                const expStr = !isNaN(d.getTime()) ? `${d.getFullYear()}.${(d.getMonth()+1).toString().padStart(2,'0')}.${d.getDate().toString().padStart(2,'0')}` : '--.--.--';
                 document.getElementById('couponExpiry').innerText = expStr;
 
             } else {
@@ -1090,8 +776,8 @@
         }
 
         function resetForm() {
-            if(confirm('入力をリセットしますか？')) {
-                location.reload(); 
+            if (confirm('入力をリセットしますか？')) {
+                location.reload();
             }
         }
 
@@ -1101,7 +787,7 @@
             const tabEdit = document.getElementById('tab-panel-edit');
             const tabPrev = document.getElementById('tab-panel-preview');
 
-            if(panelName === 'edit') {
+            if (panelName === 'edit') {
                 edit.classList.remove('hidden'); prev.classList.add('hidden');
                 tabEdit.className = "flex-1 py-3 text-sm font-bold text-brand-600 border-b-4 border-brand-400 bg-brand-50 transition-colors";
                 tabPrev.className = "flex-1 py-3 text-sm font-bold text-gray-400 border-b-4 border-transparent hover:bg-gray-50 transition-colors";
@@ -1109,7 +795,7 @@
                 edit.classList.add('hidden'); prev.classList.remove('hidden');
                 tabEdit.className = "flex-1 py-3 text-sm font-bold text-gray-400 border-b-4 border-transparent hover:bg-gray-50 transition-colors";
                 tabPrev.className = "flex-1 py-3 text-sm font-bold text-brand-600 border-b-4 border-brand-400 bg-brand-50 transition-colors";
-                setTimeout(() => { if(skinChart) skinChart.resize(); if(faceChart) faceChart.resize(); }, 50);
+                setTimeout(() => { if (mainChart) mainChart.resize(); }, 50);
             }
         }
 
@@ -1117,10 +803,10 @@
             const element = document.getElementById('captureArea');
             const msg = document.getElementById('saveMsg');
             msg.style.opacity = '1'; msg.innerText = '生成中...';
-            
+
             html2canvas(element, { scale: 2, backgroundColor: '#ffffff', logging: false }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = `vivie_Report_${document.getElementById('customerName').value}.png`;
+                link.download = `PBB_Report_${document.getElementById('customerName').value || 'Guest'}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
                 msg.innerText = '保存完了';
